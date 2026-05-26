@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Worx Solutions — Managed IT Services | New England</title>
+<meta name="description" content="Managed WiFi, security cameras, firewall, and help desk services for small businesses across New England. Based in Quincy, MA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #f5f3ef;
+    --white: #111111;
+    --off-white: #e2ded6;
+    --accent: #c8f03c;
+    --accent-dim: #8aaa1e;
+    --gray-1: #e9e6e0;
+    --gray-2: #dedad4;
+    --gray-3: #c8c4bc;
+    --gray-4: #b0aba4;
+    --gray-5: #555555;
+    --gray-6: #666666;
+    --gray-7: #888888;
+    --font-display: 'Big Shoulders Display', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+    --font-serif: 'DM Serif Display', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.2;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+  }
+  .mono { font-family: var(--font-mono); }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: rgba(245,243,239,0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-logo-mark svg { width: 16px; height: 16px; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--off-white); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, transparent 40%, rgba(245,243,239,0.95) 90%),
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200,240,60,0.04) 0%, transparent 60%);
+    z-index: 0;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .hero-tag-line {
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-h1 {
+    font-size: clamp(72px, 10vw, 148px);
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .hero-h1 .accent-line {
+    color: var(--accent);
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+  }
+
+  .hero-sub {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-family: var(--font-display);
+    font-weight: 300;
+    color: var(--gray-6);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 48px;
+    max-width: 640px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 16px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--off-white); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-6);
+    border: 1px solid var(--gray-4);
+    padding: 16px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { color: var(--white); border-color: var(--gray-6); }
+
+  .hero-stats {
+    position: absolute;
+    right: 48px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 1;
+  }
+
+  .hero-stat {
+    text-align: right;
+    border-right: 2px solid var(--accent);
+    padding-right: 16px;
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-6);
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: var(--gray-1);
+    overflow: hidden;
+    padding: 14px 0;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 32px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray-5);
+  }
+
+  .ticker-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 120px 0;
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+
+  .services-title {
+    font-size: clamp(48px, 6vw, 80px);
+    color: var(--white);
+  }
+
+  .services-desc {
+    font-size: 16px;
+    color: var(--gray-6);
+    line-height: 1.8;
+    max-width: 440px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .service-card {
+    background: var(--black);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.4s ease;
+  }
+
+  .service-card:hover { background: var(--gray-1); }
+  .service-card:hover::before { height: 100%; }
+
+  .service-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gray-5);
+    letter-spacing: 0.12em;
+    margin-bottom: 32px;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+    color: var(--accent);
+  }
+
+  .service-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+
+  .service-desc {
+    font-size: 15px;
+    color: var(--gray-6);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .service-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .service-features li {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--gray-5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .service-features li::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    padding: 120px 0;
+    background: var(--gray-1);
+  }
+
+  .how-header {
+    margin-bottom: 80px;
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(25% / 2);
+    right: calc(25% / 2);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), rgba(200,240,60,0.2));
+  }
+
+  .how-step {
+    padding: 0 32px 0 0;
+    position: relative;
+  }
+
+  .how-step-num {
+    width: 56px;
+    height: 56px;
+    background: var(--black);
+    border: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .how-step-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .how-step-desc {
+    font-size: 14px;
+    color: var(--gray-6);
+    line-height: 1.7;
+  }
+
+  /* ── PRICING ── */
+  .pricing {
+    padding: 120px 0;
+  }
+
+  .pricing-header {
+    margin-bottom: 80px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .pricing-card {
+    background: var(--black);
+    padding: 48px;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    background: var(--gray-1);
+  }
+
+  .pricing-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: 0; left: 48px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    background: var(--accent);
+    color: var(--black);
+    padding: 4px 12px;
+    font-weight: 700;
+  }
+
+  .pricing-tier {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .pricing-name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 36px;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .pricing-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 56px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .pricing-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--gray-5);
+    letter-spacing: 0.08em;
+  }
+
+  .pricing-note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--gray-5);
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+  }
+
+  .pricing-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+    margin-bottom: 32px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .pricing-features li {
+    font-size: 14px;
+    color: var(--gray-6);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+
+  .pricing-check {
+    width: 16px;
+    height: 16px;
+    background: rgba(200,240,60,0.1);
+    border: 1px solid rgba(200,240,60,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .pricing-check svg { width: 10px; height: 10px; stroke: var(--accent); fill: none; stroke-width: 2; }
+
+  /* ── WHY US ── */
+  .why {
+    padding: 120px 0;
+    background: var(--gray-1);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .why-left { }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+
+  .why-point {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .why-point-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+
+  .why-point-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .why-point-desc {
+    font-size: 14px;
+    color: var(--gray-6);
+    line-height: 1.7;
+  }
+
+  .why-right {
+    position: relative;
+  }
+
+  .why-panel {
+    background: var(--black);
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 40px;
+    position: relative;
+  }
+
+  .why-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .terminal-dot {
+    width: 8px; height: 8px;
+    background: rgba(0,0,0,0.15);
+  }
+
+  .terminal-dot.active { background: var(--accent); }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gray-5);
+    letter-spacing: 0.1em;
+    margin-left: auto;
+  }
+
+  .terminal-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .terminal-line {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--gray-6);
+    letter-spacing: 0.04em;
+    display: flex;
+    gap: 12px;
+  }
+
+  .terminal-line .prompt { color: var(--accent); }
+  .terminal-line .ok { color: #5dca8a; }
+  .terminal-line .warn { color: #e8a838; }
+
+  /* ── COVERAGE AREA ── */
+  .coverage {
+    padding: 120px 0;
+    overflow: hidden;
+  }
+
+  .coverage-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .coverage-towns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.08);
+    margin-top: 40px;
+  }
+
+  .coverage-town {
+    background: var(--black);
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gray-5);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .coverage-town:hover { background: var(--gray-1); color: var(--white); }
+
+  .coverage-town::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    padding: 120px 0;
+    background: var(--gray-1);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-left { }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-item-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray-5);
+  }
+
+  .contact-item-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item-value:hover { color: var(--accent); }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray-5);
+  }
+
+  input, select, textarea {
+    background: var(--black);
+    border: 1px solid rgba(0,0,0,0.12);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--gray-5);
+  }
+
+  select { cursor: pointer; }
+
+  select option { background: var(--gray-2); }
+
+  textarea { resize: vertical; min-height: 120px; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-5);
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gray-5);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  /* ── TERMINAL DARK OVERRIDE (stays dark on light theme) ── */
+  .why-panel {
+    background: #111111 !important;
+    border-color: rgba(255,255,255,0.08) !important;
+  }
+  .why-panel::before { background: linear-gradient(90deg, var(--accent), transparent) !important; }
+  .terminal-header { border-color: rgba(255,255,255,0.08) !important; }
+  .terminal-dot { background: rgba(255,255,255,0.15) !important; }
+  .terminal-dot.active { background: var(--accent) !important; }
+  .terminal-title { color: #555555 !important; }
+  .terminal-line { color: #888888 !important; }
+  .terminal-line .prompt { color: var(--accent) !important; }
+  .terminal-line .ok { color: #5dca8a !important; }
+  .terminal-line .warn { color: #e8a838 !important; }
+
+  /* ── MOBILE OVERLAY stays dark on light theme ── */
+  .nav-mobile-overlay { background: rgba(17,17,17,0.97) !important; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .hero-tag { animation-delay: 0.1s; }
+  .hero-h1 { animation-delay: 0.25s; }
+  .hero-sub { animation-delay: 0.4s; }
+  .hero-actions { animation-delay: 0.55s; }
+  .hero-stats { animation-delay: 0.6s; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards; }
+
+  /* ── MOBILE NAV TOGGLE ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    padding: 8px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+
+    .hero { padding: 0 24px 64px; }
+    .hero-stats { display: none; }
+    .section-inner { padding: 0 24px; }
+
+    .services-header { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .how-steps { grid-template-columns: 1fr 1fr; }
+    .how-steps::before { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .coverage-inner { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 32px 24px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .partners-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .partners-list { gap: 6px; }
+    .cta-band-actions { flex-direction: column; align-items: stretch; }
+    .cta-band-actions a { text-align: center; }
+  }
+
+  /* ── MOBILE NAV OVERLAY ── */
+  .nav-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8,8,8,0.98);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .nav-mobile-overlay.open { opacity: 1; pointer-events: all; }
+  .nav-mobile-overlay .overlay-link {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(36px, 8vw, 56px);
+    text-transform: uppercase;
+    color: #f4f2ee;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    padding: 8px 24px;
+    transition: color 0.2s;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-mobile-overlay .overlay-link:hover { color: var(--accent); }
+  .nav-mobile-close {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: none;
+    border: none;
+    color: #888888;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.2s;
+  }
+  .nav-mobile-close:hover { color: #f4f2ee; }
+  .nav-mobile-overlay .overlay-cta {
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #111111;
+    padding: 14px 32px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-mobile-overlay .overlay-cta:hover { background: #e8e5df; }
+
+  /* ── PARTNERS STRIP ── */
+  .partners {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 24px 0;
+    background: var(--black);
+  }
+  .partners-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .partners-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .partners-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(0,0,0,0.12);
+    flex-shrink: 0;
+  }
+  .partners-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .partner-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 5px 12px;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .partner-badge:hover { color: var(--gray-7); border-color: rgba(0,0,0,0.25); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 120px 0;
+    background: var(--black);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.08);
+    margin-top: 64px;
+  }
+  .testimonial-card {
+    background: var(--black);
+    padding: 40px;
+    position: relative;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .testimonial-card:hover { background: var(--gray-1); }
+  .testimonial-mark {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 80px;
+    color: var(--accent);
+    line-height: 0.6;
+    margin-bottom: 20px;
+    user-select: none;
+  }
+  .testimonial-text {
+    font-size: 15px;
+    color: var(--gray-6);
+    line-height: 1.8;
+    flex: 1;
+    margin-bottom: 32px;
+  }
+  .testimonial-author {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 20px;
+  }
+  .testimonial-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .testimonial-biz {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    padding: 100px 0;
+    background: var(--gray-1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  }
+  .cta-band-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,240,60,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-band-inner { position: relative; z-index: 1; }
+  .cta-band-title {
+    font-size: clamp(48px, 6vw, 88px);
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .cta-band-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--gray-5);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .cta-band-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="6" height="6" fill="#080808"/>
+        <rect x="9" y="1" width="6" height="6" fill="#080808"/>
+        <rect x="1" y="9" width="6" height="6" fill="#080808"/>
+        <rect x="9" y="9" width="3" height="6" fill="#080808"/>
+      </svg>
+    </div>
+    Data Worx <span style="color: var(--accent);">Solutions</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#coverage">Coverage</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <a href="#contact" class="nav-cta">Get a Free Assessment</a>
+
+  <button class="nav-toggle" aria-label="Toggle menu">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <rect y="3" width="20" height="1.5" fill="currentColor"/>
+      <rect y="9.25" width="20" height="1.5" fill="currentColor"/>
+      <rect y="15.5" width="20" height="1.5" fill="currentColor"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-mobile-overlay" id="nav-overlay">
+  <button class="nav-mobile-close" id="nav-close" aria-label="Close menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      <line x1="21" y1="3" x2="3" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+  </button>
+  <a href="#services" class="overlay-link">Services</a>
+  <a href="#pricing" class="overlay-link">Pricing</a>
+  <a href="#coverage" class="overlay-link">Coverage</a>
+  <a href="#contact" class="overlay-link">Contact</a>
+  <a href="#contact" class="overlay-cta">Get Free Assessment</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-line"></span>
+      <span class="label">Quincy, MA — Managed IT Services Across New England</span>
+    </div>
+
+    <h1 class="display hero-h1">
+      Your Network.<br>
+      <span class="accent-line">Our Mission.</span>
+    </h1>
+
+    <p class="hero-sub">
+      WiFi · Cameras · Firewall · Help Desk — all on one monthly plan, zero upfront cost
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Assessment</a>
+      <a href="#services" class="btn-secondary">View Services</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Upfront Hardware Cost</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">36<span style="font-size:20px">mo</span></div>
+      <div class="hero-stat-label">Simple Monthly Plans</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">24/7</div>
+      <div class="hero-stat-label">Remote Monitoring</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <!-- first set -->
+    <span class="ticker-item"><span class="ticker-dot"></span>Managed WiFi</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Security Cameras</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Managed Firewall</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Help Desk Support</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>No Upfront Cost</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Remote Monitoring</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>New England</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Same-Day Response</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Guest Networks</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>VLAN Segmentation</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span>Managed WiFi</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Security Cameras</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Managed Firewall</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Help Desk Support</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>No Upfront Cost</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Remote Monitoring</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>New England</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Same-Day Response</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Guest Networks</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>VLAN Segmentation</span>
+  </div>
+</div>
+
+<!-- PARTNERS STRIP -->
+<div class="partners">
+  <div class="partners-inner">
+    <span class="partners-label">Technology Partners</span>
+    <div class="partners-divider"></div>
+    <div class="partners-list">
+      <div class="partner-badge">Ubiquiti UniFi</div>
+      <div class="partner-badge">FortiGate</div>
+      <div class="partner-badge">Cisco Meraki</div>
+      <div class="partner-badge">Axis Cameras</div>
+      <div class="partner-badge">Microsoft 365</div>
+      <div class="partner-badge">Palo Alto</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <h2 class="display services-title">What We<br>Manage</h2>
+      <p class="services-desc">We handle your entire technology infrastructure so you can focus on what you do best. One partner, one bill, zero headaches.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- WiFi -->
+      <div class="service-card">
+        <div class="service-num">01 / 04</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 20C10.4 13.6 18.8 10 24 10s13.6 3.6 20 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+          <path d="M10 27c3.8-3.8 8.6-6 14-6s10.2 2.2 14 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+          <path d="M16 34c2.2-2.2 4.8-3.5 8-3.5s5.8 1.3 8 3.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+          <rect x="21" y="40" width="6" height="2" fill="currentColor"/>
+        </svg>
+        <h3 class="service-name">Managed WiFi</h3>
+        <p class="service-desc">Enterprise-grade wireless coverage across your entire space. We handle installation, monitoring, and maintenance — you just connect.</p>
+        <ul class="service-features">
+          <li>Multi-AP coverage with no dead zones</li>
+          <li>Separate staff and guest networks</li>
+          <li>Active Directory / 802.1X authentication</li>
+          <li>Remote management and monitoring</li>
+          <li>Monthly password rotation for guest WiFi</li>
+        </ul>
+      </div>
+
+      <!-- Cameras -->
+      <div class="service-card">
+        <div class="service-num">02 / 04</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="14" width="32" height="22" rx="0" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M36 20l8-6v20l-8-6V20z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="miter"/>
+          <circle cx="18" cy="25" r="5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <h3 class="service-name">Security Cameras</h3>
+        <p class="service-desc">HD surveillance with remote viewing from anywhere. Know what's happening at your business whether you're on-site or across the country.</p>
+        <ul class="service-features">
+          <li>Indoor and outdoor IP cameras</li>
+          <li>30-day local video retention</li>
+          <li>Remote viewing via mobile app</li>
+          <li>Motion alerts and AI detection</li>
+          <li>Isolated camera network for security</li>
+        </ul>
+      </div>
+
+      <!-- Firewall -->
+      <div class="service-card">
+        <div class="service-num">03 / 04</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4L6 12v14c0 10 8 18 18 18s18-8 18-18V12L24 4z" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M16 24l6 6 10-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+        </svg>
+        <h3 class="service-name">Managed Firewall</h3>
+        <p class="service-desc">Your first line of defense against threats. We configure, monitor, and maintain your network security so attackers never get a foothold.</p>
+        <ul class="service-features">
+          <li>Intrusion detection and prevention</li>
+          <li>Content filtering and geo-blocking</li>
+          <li>VPN for secure remote access</li>
+          <li>Monthly security reporting</li>
+          <li>Firmware and signature updates</li>
+        </ul>
+      </div>
+
+      <!-- Help Desk -->
+      <div class="service-card">
+        <div class="service-num">04 / 04</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M18 20c0-3.3 2.7-6 6-6s6 2.7 6 6c0 4-6 5-6 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/>
+          <rect x="22" y="36" width="4" height="4" fill="currentColor"/>
+        </svg>
+        <h3 class="service-name">Help Desk</h3>
+        <p class="service-desc">When your employees have a tech problem, they call us — not you. Remote support for your team, resolved fast so they stay productive.</p>
+        <ul class="service-features">
+          <li>Remote desktop support</li>
+          <li>Email and Microsoft 365 support</li>
+          <li>Printer and peripheral troubleshooting</li>
+          <li>New employee onboarding</li>
+          <li>24/7 remote device monitoring</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="how-header">
+      <span class="label">The Process</span>
+      <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin-top: 16px;">How It Works</h2>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <h3 class="how-step-title">Free Assessment</h3>
+        <p class="how-step-desc">We visit your location, survey your space, and evaluate your current setup. No charge, no pressure.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <h3 class="how-step-title">Custom Proposal</h3>
+        <p class="how-step-desc">You receive a clear proposal with a flat monthly price. No hidden fees, no surprise hardware bills.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <h3 class="how-step-title">We Install Everything</h3>
+        <p class="how-step-desc">Our team handles the full installation. Most businesses are up and running within a single day.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">04</div>
+        <h3 class="how-step-title">We Manage It All</h3>
+        <p class="how-step-desc">From that day forward, we monitor, maintain, and support your technology. You focus on your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="pricing-header">
+      <span class="label">Pricing</span>
+      <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin-top: 16px;">Simple Monthly Plans</h2>
+      <p style="color: var(--gray-6); margin-top: 16px; max-width: 480px;">All hardware included. No upfront cost. 36-month agreement. Everything managed remotely.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Essentials</div>
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">
+          <span style="font-family: var(--font-mono); font-size: 24px; color: var(--gray-5); align-self: flex-start; margin-top: 12px;">$</span>
+          <span class="pricing-amount">179</span>
+          <span class="pricing-period">/mo</span>
+        </div>
+        <div class="pricing-note">Per location · 36-month agreement</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Up to 2 WiFi access points</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Managed router / firewall</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Staff + guest networks</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>24/7 remote monitoring</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Firmware updates</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="width: 100%; text-align: center; display: block;">Get Started</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-tier">Business</div>
+        <div class="pricing-name">Standard</div>
+        <div class="pricing-price">
+          <span style="font-family: var(--font-mono); font-size: 24px; color: var(--gray-5); align-self: flex-start; margin-top: 12px;">$</span>
+          <span class="pricing-amount">653</span>
+          <span class="pricing-period">/mo</span>
+        </div>
+        <div class="pricing-note">Per location · 36-month agreement</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Up to 5 WiFi access points</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Business firewall + VPN</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>8 security cameras</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Help desk (up to 10 users)</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>AD / 802.1X WiFi auth</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Monthly security report</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="width: 100%; text-align: center; display: block;">Get Started</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-name">Advanced</div>
+        <div class="pricing-price">
+          <span class="pricing-amount" style="font-size: 40px; padding-top: 8px;">Custom</span>
+        </div>
+        <div class="pricing-note">Multi-site · Meraki available · Tailored to your needs</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Unlimited access points</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Enterprise firewall (FortiGate)</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Full camera system</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Unlimited help desk users</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Multi-site management</li>
+          <li><span class="pricing-check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></span>Dedicated account manager</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="width: 100%; text-align: center; display: block;">Contact Us</a>
+      </div>
+
+    </div>
+
+    <p style="font-family: var(--font-mono); font-size: 11px; color: var(--gray-5); text-align: center; margin-top: 32px; letter-spacing: 0.08em;">All plans include hardware, installation, and full remote management. Add cameras, help desk, or additional APs à la carte.</p>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-left">
+        <span class="label">Why Data Worx</span>
+        <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin-top: 16px;">One Partner.<br>Everything<br><span style="color: var(--accent); font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: 0.01em;">Managed.</span></h2>
+
+        <div class="why-points">
+          <div class="why-point">
+            <span class="why-point-num">01</span>
+            <div>
+              <div class="why-point-title">No Upfront Hardware Cost</div>
+              <p class="why-point-desc">All hardware is included in your monthly plan. We own it, we maintain it, we replace it if something fails.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-point-num">02</span>
+            <div>
+              <div class="why-point-title">One Bill, One Call</div>
+              <p class="why-point-desc">WiFi down? Camera offline? Employee can't print? One number. We handle everything across all your technology.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-point-num">03</span>
+            <div>
+              <div class="why-point-title">Locally Owned, New England Based</div>
+              <p class="why-point-desc">We're your neighbors. Based in Quincy, MA, serving businesses across all six New England states. Fast remote response anywhere, on-site when you need us.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-point-num">04</span>
+            <div>
+              <div class="why-point-title">Proactive, Not Reactive</div>
+              <p class="why-point-desc">We monitor your network 24/7 and fix most issues before you even notice them. No more waiting for something to break.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-right">
+        <div class="why-panel">
+          <div class="terminal-header">
+            <div class="terminal-dot active"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <span class="terminal-title">NETWORK_STATUS.SH</span>
+          </div>
+          <div class="terminal-lines">
+            <div class="terminal-line"><span class="prompt">→</span> Checking SmithLawOffice...</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;Gateway online · 99.8% uptime</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;4 APs online · 23 clients</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;Firewall active · 0 threats</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;6 cameras · recording</div>
+            <div class="terminal-line" style="margin-top: 8px;"><span class="prompt">→</span> Checking JoesCoffeeShop...</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;Gateway online · 100% uptime</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;2 APs online · 41 clients</div>
+            <div class="terminal-line"><span class="warn">[!]</span> &nbsp;&nbsp;Guest pwd rotation due in 3 days</div>
+            <div class="terminal-line" style="margin-top: 8px;"><span class="prompt">→</span> Checking ABCRetail...</div>
+            <div class="terminal-line"><span class="ok">[OK]</span> &nbsp;All systems nominal</div>
+            <div class="terminal-line" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.08);">
+              <span style="color: var(--gray-5);">Monitoring</span>&nbsp;<span style="color: var(--accent);">14 sites</span>&nbsp;<span style="color: var(--gray-5);">· All healthy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section class="coverage" id="coverage">
+  <div class="section-inner">
+    <div class="coverage-inner">
+      <div>
+        <span class="label">Service Area</span>
+        <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin-top: 16px;">Serving All<br>of New England</h2>
+        <p style="color: var(--gray-6); margin-top: 24px; max-width: 400px; font-size: 15px; line-height: 1.8;">Based in Quincy, MA. We serve businesses across all six New England states — remote support anywhere, on-site visits scheduled within 24 hours.</p>
+
+        <div class="coverage-towns">
+          <div class="coverage-town">Massachusetts</div>
+          <div class="coverage-town">Connecticut</div>
+          <div class="coverage-town">Rhode Island</div>
+          <div class="coverage-town">New Hampshire</div>
+          <div class="coverage-town">Vermont</div>
+          <div class="coverage-town">Maine</div>
+          <div class="coverage-town">Boston, MA</div>
+          <div class="coverage-town">Providence, RI</div>
+          <div class="coverage-town">Hartford, CT</div>
+          <div class="coverage-town">Manchester, NH</div>
+          <div class="coverage-town">Portland, ME</div>
+          <div class="coverage-town">Burlington, VT</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="background: var(--gray-1); border: 1px solid rgba(0,0,0,0.08); padding: 48px; position: relative;">
+          <div style="position: absolute; top: 0; right: 0; left: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent);"></div>
+          <span class="label" style="display: block; margin-bottom: 32px;">Response Times</span>
+
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--gray-6); letter-spacing: 0.08em;">REMOTE SUPPORT</span>
+                <span style="font-family: var(--font-display); font-weight: 900; font-size: 24px; color: var(--accent);">&lt; 1 HR</span>
+              </div>
+              <div style="height: 2px; background: rgba(0,0,0,0.08);"><div style="height: 100%; width: 95%; background: var(--accent);"></div></div>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--gray-6); letter-spacing: 0.08em;">ON-SITE RESPONSE</span>
+                <span style="font-family: var(--font-display); font-weight: 900; font-size: 24px; color: var(--white);">SAME DAY</span>
+              </div>
+              <div style="height: 2px; background: rgba(0,0,0,0.08);"><div style="height: 100%; width: 80%; background: var(--white);"></div></div>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--gray-6); letter-spacing: 0.08em;">NEW INSTALL</span>
+                <span style="font-family: var(--font-display); font-weight: 900; font-size: 24px; color: var(--white);">&lt; 2 WEEKS</span>
+              </div>
+              <div style="height: 2px; background: rgba(0,0,0,0.08);"><div style="height: 100%; width: 65%; background: var(--white);"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <span class="label">Client Stories</span>
+    <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin-top: 16px;">What Our<br>Clients Say</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-mark">"</div>
+        <p class="testimonial-text">Data Worx set up our entire office network and camera system in a single day. When we had a minor issue three months later, they remoted in and had it fixed within the hour. Best tech decision we've made for this business.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Mike Donovan</div>
+          <div class="testimonial-biz">Donovan &amp; Sons Auto Repair · Quincy, MA</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-mark">"</div>
+        <p class="testimonial-text">As a law firm we need rock-solid security and reliability. Data Worx built us a network we completely trust — separate staff and guest WiFi, cameras covering every entrance, and they handle all our team's tech questions. One bill. Worth every penny.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Patricia Walsh</div>
+          <div class="testimonial-biz">Walsh Legal Group · Providence, RI</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-mark">"</div>
+        <p class="testimonial-text">We were losing customers because our WiFi kept dropping during peak hours. Data Worx assessed the problem, and within a week we had enterprise-grade coverage across the entire shop floor. Not a single dropout since they took over.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Sarah Kellerman</div>
+          <div class="testimonial-biz">The Corner Café · Portland, ME</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+
+      <div class="contact-left">
+        <span class="label">Get In Touch</span>
+        <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin-top: 16px;">Let's Talk<br>About Your<br><span style="color: var(--accent); font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: 0.01em;">Network.</span></h2>
+        <p style="color: var(--gray-6); margin-top: 24px; font-size: 15px; line-height: 1.8; max-width: 360px;">We offer a free on-site assessment with no obligation. We'll evaluate your current setup and show you exactly what we'd do differently.</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-item-label">Phone</span>
+            <a href="tel:+17815550100" class="contact-item-value">(781) 555-0100</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Email</span>
+            <a href="mailto:info@dataworxsolutions.com" class="contact-item-value" style="font-size: 16px; text-transform: none; letter-spacing: 0; font-weight: 400; font-family: var(--font-mono);">info@dataworxsolutions.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Location</span>
+            <span class="contact-item-value">Quincy, MA</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Hours</span>
+            <span class="contact-item-value" style="font-size: 16px;">Mon–Fri · 8am–6pm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" placeholder="Smith" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="business">Business Name</label>
+            <input type="text" id="business" placeholder="Smith Law Office" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="(781) 555-0100">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="john@smithlaw.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service">I'm interested in</label>
+            <select id="service">
+              <option value="">Select a service...</option>
+              <option>Managed WiFi</option>
+              <option>Security Cameras</option>
+              <option>Managed Firewall</option>
+              <option>Help Desk Support</option>
+              <option>Full Bundle (WiFi + Cameras + Firewall + Help Desk)</option>
+              <option>Not sure — just want to learn more</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="employees">Number of employees</label>
+            <select id="employees">
+              <option value="">Select...</option>
+              <option>1–5</option>
+              <option>6–15</option>
+              <option>16–30</option>
+              <option>31–75</option>
+              <option>75+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Anything else we should know?</label>
+            <textarea id="message" placeholder="Tell us about your current setup, pain points, or questions..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%;" id="submit-btn">
+            Request Free Assessment
+          </button>
+
+          <div id="form-success" style="display: none; margin-top: 20px; padding: 16px; border: 1px solid var(--accent); background: rgba(200,240,60,0.05);">
+            <p style="font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: 0.1em;">MESSAGE RECEIVED — We'll be in touch within one business day.</p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-band-bg"></div>
+  <div class="section-inner cta-band-inner">
+    <span class="label" style="display: block; margin-bottom: 24px;">No obligation. No pressure.</span>
+    <h2 class="display cta-band-title">Ready to Upgrade<br>Your Network?</h2>
+    <p class="cta-band-sub">Free on-site assessment &nbsp;·&nbsp; Same-week availability &nbsp;·&nbsp; New England</p>
+    <div class="cta-band-actions">
+      <a href="#contact" class="btn-primary" style="font-size: 13px; padding: 18px 40px;">Schedule Free Assessment</a>
+      <a href="tel:+17815550100" class="btn-secondary" style="font-size: 13px; padding: 18px 40px;">(781) 555-0100</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Data Worx Solutions</div>
+
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#coverage">Coverage</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="footer-copy">© 2026 Data Worx Solutions LLC · Quincy, MA</div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending...';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('contact-form').style.opacity = '0.3';
+      document.getElementById('form-success').style.display = 'block';
+      btn.style.display = 'none';
+    }, 1000);
+  }
+
+  // Mobile nav
+  const navToggle = document.querySelector('.nav-toggle');
+  const navOverlay = document.getElementById('nav-overlay');
+  const navClose = document.getElementById('nav-close');
+
+  navToggle.addEventListener('click', () => {
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeOverlay() {
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  navClose.addEventListener('click', closeOverlay);
+  navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeOverlay));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Scroll-reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .how-step, .pricing-card, .why-point, .coverage-town, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
