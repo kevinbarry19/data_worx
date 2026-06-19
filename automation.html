@@ -973,6 +973,40 @@
     gap: 16px;
     flex-wrap: wrap;
   }
+
+  /* Product showcase */
+  .showcase { padding: 120px 0; }
+  .showcase-hero {
+    margin-top: 56px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: var(--gray-1);
+  }
+  .showcase-hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    z-index: 1;
+  }
+  .showcase-hero img { display: block; width: 100%; }
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .shot {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--gray-1);
+  }
+  .shot img { display: block; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .shot-cap { padding: 18px 22px; }
+  .shot-cap p { font-size: 13px; color: var(--gray-6); line-height: 1.6; margin-top: 6px; }
+  @media (max-width: 900px) { .shots { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -993,6 +1027,7 @@
 
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
+    <li><a href="#product">Screens</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#security">Security</a></li>
@@ -1019,6 +1054,7 @@
     </svg>
   </button>
   <a href="#features" class="overlay-link">Features</a>
+  <a href="#product" class="overlay-link">Screens</a>
   <a href="#how" class="overlay-link">How It Works</a>
   <a href="#pricing" class="overlay-link">Pricing</a>
   <a href="#security" class="overlay-link">Security</a>
@@ -1221,6 +1257,51 @@
         </ul>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="showcase" id="product">
+  <div class="section-inner">
+    <div class="services-header">
+      <h2 class="display services-title">See It<br>In Action</h2>
+      <p class="services-desc">A clean, fast workspace your team will actually want to use — on your own Microsoft 365, in light or dark.</p>
+    </div>
+
+    <div class="showcase-hero">
+      <img src="images/dashboard.png" alt="IT ticket dashboard with SLA tracking" loading="lazy" />
+    </div>
+
+    <div class="shots">
+      <div class="shot">
+        <img src="images/chat.png" alt="AI helpdesk chat" loading="lazy" />
+        <div class="shot-cap">
+          <span class="label">Conversational Agent</span>
+          <p>Employees get help in plain language, with one-click common requests.</p>
+        </div>
+      </div>
+      <div class="shot">
+        <img src="images/approval.png" alt="Action approval with audit" loading="lazy" />
+        <div class="shot-cap">
+          <span class="label">Approval Gates</span>
+          <p>Sensitive Microsoft 365 actions wait for your sign-off — every step logged.</p>
+        </div>
+      </div>
+      <div class="shot">
+        <img src="images/reports.png" alt="Reporting and SLA dashboard" loading="lazy" />
+        <div class="shot-cap">
+          <span class="label">Reporting &amp; SLAs</span>
+          <p>Live SLA compliance, ticket trends, and technician performance.</p>
+        </div>
+      </div>
+      <div class="shot">
+        <img src="images/settings.png" alt="Tenant settings and configuration" loading="lazy" />
+        <div class="shot-cap">
+          <span class="label">Yours To Configure</span>
+          <p>Tune SLAs, escalation, categories, and branding to fit your organization.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
