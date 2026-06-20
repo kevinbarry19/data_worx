@@ -1007,6 +1007,32 @@
   .shot-cap { padding: 18px 22px; }
   .shot-cap p { font-size: 13px; color: var(--gray-6); line-height: 1.6; margin-top: 6px; }
   @media (max-width: 900px) { .shots { grid-template-columns: 1fr; } }
+
+  /* Trust strip */
+  .trust-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);
+    margin-top: 48px;
+  }
+  .trust-item { background: var(--black); padding: 28px 24px; }
+  .trust-item .label { display: block; margin-bottom: 10px; }
+  .trust-item p { font-size: 13px; color: var(--gray-6); line-height: 1.6; }
+  @media (max-width: 760px) { .trust-strip { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .faq { padding: 120px 0; }
+  .faq-list { margin-top: 48px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .faq-item summary {
+    list-style: none; cursor: pointer; padding: 24px 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 2.2vw, 24px);
+    text-transform: uppercase; letter-spacing: 0.01em; color: var(--white);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; color: var(--accent); font-size: 24px; flex-shrink: 0; }
+  .faq-item[open] summary::after { content: '\2212'; }
+  .faq-item p { padding: 0 0 24px; max-width: 760px; font-size: 15px; color: var(--gray-6); line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -1442,6 +1468,53 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="services-header">
+      <h2 class="display services-title">Questions,<br>Answered</h2>
+      <p class="services-desc">The things IT leaders ask before they trust an agent with their Microsoft 365.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Do you need admin access to our Microsoft 365?</summary>
+        <p>No — the agent runs against <strong>your own</strong> Microsoft 365 app registration. You grant exactly the permissions you want and can revoke them at any time. We never store your admin credentials, and the agent acts through your tenant, not ours.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Where does our data live, and is it secure?</summary>
+        <p>Your tickets, knowledge base, and configuration are scoped to your organization alone — never shared across customers. Sensitive settings are encrypted at rest, and every action the agent takes is recorded in an immutable audit log you can review and export.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will the agent make changes without our approval?</summary>
+        <p>Only what you allow. You decide which actions run automatically and which require an admin's sign-off. Sensitive changes — password resets, group and license changes, mailbox access — wait for approval every time, and it's all logged.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How does pricing work?</summary>
+        <p>A flat <strong>$49/month</strong> base plus <strong>$7 per supported employee</strong>. The owner seat is free, every feature is included, there's no contract, and you can cancel anytime. Ten employees works out to $119/month.</p>
+      </details>
+      <details class="faq-item">
+        <summary>We already have an IT team or MSP — does this replace them?</summary>
+        <p>It works alongside them. The agent handles first-line requests and routine Microsoft 365 tasks so your people focus on the work that actually needs a human — and routes everything else, with full visibility.</p>
+      </details>
+    </div>
+
+    <div class="trust-strip">
+      <div class="trust-item">
+        <span class="label">Your Tenant</span>
+        <p>Runs on your own Microsoft 365 app registration. Revoke access anytime.</p>
+      </div>
+      <div class="trust-item">
+        <span class="label">Your Approval</span>
+        <p>Sensitive actions wait for an admin's sign-off — never automatic unless you say so.</p>
+      </div>
+      <div class="trust-item">
+        <span class="label">Full Audit Trail</span>
+        <p>Every action and approval is logged in an immutable record you can export.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA BAND -->
 <section class="cta-band">
   <div class="cta-band-bg"></div>
@@ -1474,10 +1547,21 @@
   // ── App links ──────────────────────────────────────────────────────────────
   // TODO: set APP_URL to the PUBLIC app domain once the app is hosted publicly.
   // (Currently the private test server — links won't resolve for outside visitors.)
+  // Flip LAUNCHED to true once the app is publicly hosted; until then CTAs route
+  // to the contact/waitlist form instead of a dead private URL.
+  const LAUNCHED = false;
   const APP_URL = 'https://192.168.196.164';
+  const WAITLIST_URL = 'index.html#contact';
   const APP_PATHS = { signup: '/signup', login: '/saas/login' };
   document.querySelectorAll('[data-app]').forEach(a => {
-    a.href = APP_URL + (APP_PATHS[a.getAttribute('data-app')] || '/');
+    if (LAUNCHED) {
+      a.href = APP_URL + (APP_PATHS[a.getAttribute('data-app')] || '/');
+    } else if (a.getAttribute('data-app') === 'login') {
+      a.style.display = 'none';                 // no sign-in until launch
+    } else {
+      a.href = WAITLIST_URL;
+      a.textContent = 'Request Early Access';
+    }
   });
 
   // Mobile nav
