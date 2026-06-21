@@ -1621,20 +1621,48 @@
     }
   });
 
-  // Early-access form (front-end stub, mirrors the MSP contact form). To actually
-  // receive submissions, set the <form> action to a form service (Formspree/Formsubmit)
-  // or post to the app's API once hosted.
-  function eaSubmit(e) {
+  // Early-access form. Set EARLY_ACCESS_EMAIL to your official inbox to start
+  // receiving submissions (relayed via FormSubmit.co — no backend/signup; you'll
+  // get a one-time confirmation email on the first send to activate it).
+  // While it's blank, the form just shows the success message (no delivery yet).
+  const EARLY_ACCESS_EMAIL = '';   // e.g. 'hello@dataworxautomation.com'
+
+  function showEaSuccess() {
+    document.getElementById('ea-form').style.opacity = '0.4';
+    document.getElementById('ea-success').style.display = 'block';
+    document.getElementById('ea-submit').style.display = 'none';
+  }
+
+  async function eaSubmit(e) {
     e.preventDefault();
     const btn = document.getElementById('ea-submit');
-    btn.textContent = 'Sending…';
-    btn.style.opacity = '0.7';
-    btn.disabled = true;
-    setTimeout(() => {
-      document.getElementById('ea-form').style.opacity = '0.4';
-      document.getElementById('ea-success').style.display = 'block';
-      btn.style.display = 'none';
-    }, 800);
+    btn.textContent = 'Sending…'; btn.style.opacity = '0.7'; btn.disabled = true;
+
+    const data = {
+      "First name": document.getElementById('ea-fname').value,
+      "Last name":  document.getElementById('ea-lname').value,
+      "Email":      document.getElementById('ea-email').value,
+      "Company":    document.getElementById('ea-company').value,
+      "Employees":  document.getElementById('ea-employees').value,
+      "Message":    document.getElementById('ea-message').value,
+      "_subject":   "New Data Worx Automation early-access request",
+    };
+
+    if (!EARLY_ACCESS_EMAIL) {           // not wired yet — show success only
+      setTimeout(showEaSuccess, 700);
+      return;
+    }
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/' + EARLY_ACCESS_EMAIL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!r.ok) throw new Error('submit failed');
+      showEaSuccess();
+    } catch (err) {
+      btn.textContent = 'Try again'; btn.style.opacity = '1'; btn.disabled = false;
+    }
   }
 
   // Mobile nav
