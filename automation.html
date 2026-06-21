@@ -1033,6 +1033,24 @@
   .faq-item summary::after { content: '+'; color: var(--accent); font-size: 24px; flex-shrink: 0; }
   .faq-item[open] summary::after { content: '\2212'; }
   .faq-item p { padding: 0 0 24px; max-width: 760px; font-size: 15px; color: var(--gray-6); line-height: 1.7; }
+
+  /* Early-access waitlist */
+  .waitlist { padding: 120px 0; background: var(--gray-1); border-top: 1px solid rgba(255,255,255,0.06); }
+  .waitlist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .ea-form { display: flex; flex-direction: column; gap: 16px; }
+  .ea-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ea-field { display: flex; flex-direction: column; gap: 6px; }
+  .ea-field label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-6); }
+  .ea-field input, .ea-field select, .ea-field textarea {
+    background: var(--black); border: 1px solid rgba(255,255,255,0.12); color: var(--white);
+    font-family: var(--font-body); font-size: 14px; padding: 12px 14px; outline: none; transition: border-color 0.15s;
+  }
+  .ea-field input:focus, .ea-field select:focus, .ea-field textarea:focus { border-color: var(--accent); }
+  .ea-field textarea { resize: vertical; min-height: 80px; }
+  .ea-form .btn-primary { width: 100%; text-align: center; margin-top: 4px; }
+  .ea-success { display: none; margin-top: 20px; padding: 16px; border: 1px solid var(--accent); background: rgba(56,189,248,0.06); }
+  .ea-success p { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: 0.08em; }
+  @media (max-width: 860px) { .waitlist-grid { grid-template-columns: 1fr; gap: 40px; } }
 </style>
 </head>
 <body>
@@ -1515,6 +1533,45 @@
   </div>
 </section>
 
+<!-- EARLY ACCESS / WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="section-inner">
+    <div class="waitlist-grid">
+      <div>
+        <span class="label">Early Access</span>
+        <h2 class="display" style="font-size: clamp(40px,5vw,72px); margin: 16px 0; line-height: 0.95;">Request<br><span style="color: var(--accent); font-family: var(--font-serif); font-style: italic; font-weight: 400;">Early Access.</span></h2>
+        <p style="color: var(--gray-6); line-height: 1.8; font-size: 15px; max-width: 420px;">
+          We're onboarding early customers now. Tell us a bit about your team and we'll reach out to get you set up on your own Microsoft 365.
+        </p>
+        <p style="color: var(--gray-5); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; margin-top: 24px; line-height: 1.8;">
+          $49/mo base + $7 / employee<br>Owner seat free · No contract
+        </p>
+      </div>
+
+      <div>
+        <form class="ea-form" id="ea-form" onsubmit="eaSubmit(event)">
+          <div class="ea-row">
+            <div class="ea-field"><label for="ea-fname">First name</label><input id="ea-fname" type="text" placeholder="Jordan" required></div>
+            <div class="ea-field"><label for="ea-lname">Last name</label><input id="ea-lname" type="text" placeholder="Lee" required></div>
+          </div>
+          <div class="ea-field"><label for="ea-email">Work email</label><input id="ea-email" type="email" placeholder="jordan@yourcompany.com" required></div>
+          <div class="ea-field"><label for="ea-company">Company</label><input id="ea-company" type="text" placeholder="Your Company" required></div>
+          <div class="ea-field">
+            <label for="ea-employees">Employees you support</label>
+            <select id="ea-employees">
+              <option value="">Select…</option>
+              <option>1–10</option><option>11–25</option><option>26–50</option><option>51–100</option><option>100+</option>
+            </select>
+          </div>
+          <div class="ea-field"><label for="ea-message">Anything we should know? (optional)</label><textarea id="ea-message" placeholder="Current setup, what you're hoping to automate…"></textarea></div>
+          <button type="submit" class="btn-primary" id="ea-submit">Request Early Access</button>
+          <div class="ea-success" id="ea-success"><p>YOU'RE ON THE LIST — we'll email you when your early-access spot is ready.</p></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA BAND -->
 <section class="cta-band">
   <div class="cta-band-bg"></div>
@@ -1551,7 +1608,7 @@
   // to the contact/waitlist form instead of a dead private URL.
   const LAUNCHED = false;
   const APP_URL = 'https://192.168.196.164';
-  const WAITLIST_URL = 'index.html#contact';
+  const WAITLIST_URL = '#waitlist';
   const APP_PATHS = { signup: '/signup', login: '/saas/login' };
   document.querySelectorAll('[data-app]').forEach(a => {
     if (LAUNCHED) {
@@ -1563,6 +1620,22 @@
       a.textContent = 'Request Early Access';
     }
   });
+
+  // Early-access form (front-end stub, mirrors the MSP contact form). To actually
+  // receive submissions, set the <form> action to a form service (Formspree/Formsubmit)
+  // or post to the app's API once hosted.
+  function eaSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('ea-submit');
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('ea-form').style.opacity = '0.4';
+      document.getElementById('ea-success').style.display = 'block';
+      btn.style.display = 'none';
+    }, 800);
+  }
 
   // Mobile nav
   const navToggle = document.querySelector('.nav-toggle');
